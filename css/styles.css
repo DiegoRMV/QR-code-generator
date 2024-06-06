@@ -58,12 +58,19 @@ main {
 .container input {
 	width: 100%;
 	padding: 1.4rem 10rem 1.4rem 1.4rem;
-	border: 2px solid var(--color2);
 	border-radius: 1rem;
 	background-color: var(--color6);
 	color: var(--color1);
 	font-weight: bold;
 	caret-color: var(--color1);
+}
+
+.success {
+	border: 2px solid var(--color2);
+}
+
+.error {
+	border: 2px solid red;
 }
 
 .container input::placeholder {

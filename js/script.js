@@ -10,18 +10,17 @@ const btnQr = document.getElementById("btn-qr");
 let qrcode;
 let file = {};
 
-console.log(qrModal);
-
 btnShare.addEventListener("click", () => {
-	if (navigator.share) {
-		try {
-			navigator.share(file);
-		} catch (error) {
-			console.log(error);
-		}
-	} else {
-		alert("no soportado");
-	}
+	// if (navigator.share) {
+	// 	try {
+	// 		navigator.share(file);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// } else {
+	// 	alert("no soportado");
+	// }
+	console.log("share")
 });
 
 btnClose.addEventListener("click", () => {
@@ -39,9 +38,10 @@ btnDownload.addEventListener("click", () => {
 });
 
 btnQr.addEventListener("click", () => {
-	containerModal.style.display = "flex";
 	qr.innerHTML = "";
-	if (qrInput.value) {
+	if (qrInput.value && qrInput.checkValidity()) {
+		qrInput.classList.remove("error");
+		containerModal.style.display = "flex";
 		qrcode = new QRCode(qr, {
 			text: qrInput.value,
 			colorDark: "#000000",
@@ -55,6 +55,8 @@ btnQr.addEventListener("click", () => {
 		file["text"] = qrInput.value;
 		file["url"] = urlImage;
 		file["files"] = [fl];
+	} else {
+		qrInput.classList.add("error");
 	}
 });
 
