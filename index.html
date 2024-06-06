@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>QR Code</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" sizes="any">
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <img src="images/logo-qr-generator.svg" alt="logo qr-code">
+            <input id="qr-input" type="text" placeholder="Enter an url">
+            <button id="btn-qr" class="btn-qr">QR code</button>
+        </div>
+        <div class="qr-container">
+            <div class="qr-content">
+                <span class="btn-close">x</span>
+                <div class="circle">
+                    <div class="qr"></div>
+                </div>
+                <div class="buttons">
+                    <a class="btn-download">
+                        Download
+                        <img src="images/download.svg" alt="icon download">
+                    </a>
+                    <a class="btn-share">
+                        Share
+                        <img src="images/link-svgrepo-com.svg" alt="icon share">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

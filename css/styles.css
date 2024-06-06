@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+:root {
+	--color1: #f2f5f9;
+	--color2: #3662e3;
+	--color3: #111729;
+	--color4: #364153;
+	--color5: #4e80ee33;
+	--color6: #030617;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+/* Add some styles for body*/
+body {
+	max-width: 1280px;
+	width: 100%;
+	height: 100vh;
+	margin: 0 auto;
+	font-family: "family=Outfit", sans-serif;
+	background-color: var(--color3);
+}
+
+main {
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/bg-illustration.svg");
+	background-position: right;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 4rem 0;
+}
+
+.container {
+	position: relative;
+	max-width: 540px;
+	width: 100%;
+	/* background-color: aqua; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.container input {
+	width: 100%;
+	padding: 1.4rem 10rem 1.4rem 1.4rem;
+	border: 2px solid var(--color2);
+	border-radius: 1rem;
+	background-color: var(--color6);
+	color: var(--color1);
+	font-weight: bold;
+	caret-color: var(--color1);
+}
+
+.container input::placeholder {
+	color: var(--color4);
+}
+
+.container input:focus {
+	outline: none;
+	border: 2px solid #7e98e4;
+}
+
+.btn-qr {
+	position: absolute;
+	right: 0.4rem;
+	top: 3.5rem;
+}
+
+button,
+a {
+	max-width: 150px;
+	width: 100%;
+	padding: 1rem 0;
+	border-radius: 0.6rem;
+	background-color: var(--color2);
+	border: none;
+	color: var(--color1);
+	cursor: pointer;
+	transition: all 0.4s ease;
+}
+
+button:hover,
+a:hover {
+	background-color: var(--color4);
+}
+
+.qr-container {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	justify-content: center;
+	align-items: center;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.qr-content {
+	position: relative;
+	max-width: 400px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	padding: 2rem 0;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--color3);
+	-webkit-animation-name: animarsuperior;
+	-webkit-animation-duration: 0.5s;
+	animation-name: animarsuperior;
+	animation-duration: 0.5s;
+	border-radius: 1rem;
+	gap: 4rem;
+}
+
+@keyframes animarsuperior {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+.btn-close {
+	position: absolute;
+	color: var(--color1);
+	right: 1rem;
+	top: 0;
+	font-size: 40px;
+	font-weight: bold;
+	padding: 0;
+}
+
+.btn-close:hover {
+	opacity: 75%;
+	cursor: pointer;
+}
+
+.circle {
+	padding: 10%;
+	border-radius: 50%;
+	background-color: var(--color5);
+}
+
+.qr {
+	border-radius: 1.2rem;
+	background-color: var(--color1);
+	margin: auto;
+	padding: 12%;
+}
+
+.qr img {
+	max-width: 240px;
+	width: 100%;
+	height: auto;
+}
+
+.buttons {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.buttons a {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.3rem;
+	margin: 0.4rem;
+}
+
+.buttons img {
+	width: 16px;
+}
+
+@media (max-width: 400px) {
+	.btn-qr {
+		position: static;
+	}
+
+	.container input {
+		padding: 1rem;
+	}
+}
+
+@media (max-width: 300px) {
+	.circle {
+		margin-top: 1rem;
+		padding: 0;
+	}
+	.qr {
+		padding: 5%;
+		border-radius: 0;
+	}
+}
