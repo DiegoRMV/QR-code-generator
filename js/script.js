@@ -8,27 +8,13 @@ const btnClose = document.querySelector(".btn-close");
 const btnQr = document.getElementById("btn-qr");
 
 let qrcode;
+let patternUrl =
+	/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 let file = {};
-
-btnShare.addEventListener("click", () => {
-	// if (navigator.share) {
-	// 	try {
-	// 		navigator.share(file);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// } else {
-	// 	alert("no soportado");
-	// }
-	console.log("share")
-});
-
-btnClose.addEventListener("click", () => {
-	containerModal.style.display = "none";
-});
 
 btnDownload.addEventListener("click", () => {
 	let canvas = qr.querySelector("canvas");
+	console.log(canvas.toDataURL());
 	let urlImage = canvas
 		.toDataURL("image/png")
 		.replace("image/png", "image/octet-stream");
@@ -37,10 +23,17 @@ btnDownload.addEventListener("click", () => {
 	btnDownload.setAttribute("download", "QRcode.png");
 });
 
+qrInput.addEventListener("input", (e) => {
+	if (patternUrl.test(e.target.value)) {
+		qrInput.classList.remove("error");
+	} else {
+		qrInput.classList.add("error");
+	}
+});
+
 btnQr.addEventListener("click", () => {
 	qr.innerHTML = "";
-	if (qrInput.value && qrInput.checkValidity()) {
-		qrInput.classList.remove("error");
+	if (qrInput.value && !qrInput.classList.contains("error")) {
 		containerModal.style.display = "flex";
 		qrcode = new QRCode(qr, {
 			text: qrInput.value,
@@ -48,16 +41,46 @@ btnQr.addEventListener("click", () => {
 			colorLight: "#ffffff",
 			correctLevel: QRCode.CorrectLevel.H,
 		});
-		let canvas = qr.querySelector("canvas");
-		let urlImage = canvas.toDataURL("image/png");
-		let fl = new File([urlImage], "image.png", { type: "image/png" });
-		file["title"] = "QRcode";
-		file["text"] = qrInput.value;
-		file["url"] = urlImage;
-		file["files"] = [fl];
 	} else {
 		qrInput.classList.add("error");
 	}
+});
+
+const dataURLtoFile = (dataurl, filename) => {
+	var arr = dataurl.split(","),
+		mimeType = arr[0].match(/:(.*?);/)[1],
+		decodedData = atob(arr[1]),
+		lengthOfDecodedData = decodedData.length,
+		u8array = new Uint8Array(lengthOfDecodedData);
+	while (lengthOfDecodedData--) {
+		u8array[lengthOfDecodedData] = decodedData.charCodeAt(lengthOfDecodedData);
+	}
+	return new File([u8array], filename, { type: mimeType });
+};
+
+const shareFile = () => {
+	let text = "image";
+	let canvas = qr.querySelector("canvas");
+	let file = dataURLtoFile(canvas.toDataURL(), "qrcode.jpg");
+	
+	if (navigator.canShare && navigator.canShare({ files: [file] })) {
+		navigator
+			.share({
+				files: [file],
+				title: text,
+				text: text,
+			})
+			.then(() => console.log("Share was successful."))
+			.catch((error) => console.log("Sharing failed", error));
+	} else {
+		console.log(`Your system doesn't support sharing files.`);
+	}
+};
+
+btnShare.addEventListener("click", shareFile);
+
+btnClose.addEventListener("click", () => {
+	containerModal.style.display = "none";
 });
 
 window.addEventListener("click", (event) => {
