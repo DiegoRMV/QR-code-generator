@@ -8,6 +8,7 @@
 	--color5: #4e80ee33;
 	--color6: #030617;
 }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -90,8 +91,8 @@ main {
 
 .btn-qr {
 	position: absolute;
-	right: 0.4rem;
-	top: 3.5rem;
+	right: 1rem;
+	top: 4rem;
 }
 
 button,
@@ -131,7 +132,6 @@ a:hover {
 	position: relative;
 	max-width: 400px;
 	width: 100%;
-	/* height: fit-content; */
 	display: flex;
 	padding: 2rem 0;
 	flex-direction: column;
